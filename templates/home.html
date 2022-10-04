@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p>Hi {{ user.username }}</p>
+<a href="{% url 'site_new' %}">New Site</a>
+<br>
+<br>
+  <a href="{% url 'logout' %}">logOut</a>
+  {% if object_list %}
+    {% for site in object_list %}
+    <ul>
+      <li><a href="{% url 'site_detail' site.slug %}">{{ site.siteName }}</a></li>
+    </ul>
+    {% endfor %}
+  {% else %}
+      <p>You have no sites saved.</p>
+  {% endif %}
+
+{% else %}
+<h2>Welcome to password safe.</h2>
+<hr>
+<a href="{% url 'login' %}">LogIn</a> |
+<a href="{% url 'signup' %}">SignUp</a>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ object.siteName }}</h2>
+<a href="{% url 'account_new' object.slug %}"><button type="button" >New Account</button></a>
+<hr>
+{% for username in object.account_set.all %}
+<p>Username: {{ username.username }}</p>
+<p>Password: {{ username.password }}</p>
+<p><a href="{% url 'account_edit' object.slug username.slug_field %}"><button type="button">Edit account</button></a>
+<a href="{% url 'account_delete' object.slug username.slug_field %}"><button type="button">Delete account</button></a></p>
+<hr>
+{% endfor %}
+<p><a href="{% url 'site_delete' object.slug %}"><button type="button">Delete site</button></a>
+  <a href="{% url 'site_edit' object.slug %}"><button type="button">Edit site</button></a></p>
+{% endblock content %}
